@@ -1,0 +1,117 @@
+# Excel Metadata Extraction Configuration File
+# =============================================
+# This file allows you to configure all settings for the extraction tool
+# without needing to provide input interactively each time you run it.
+#
+# To use this configuration:
+#   1. Fill in the settings below with your desired values
+#   2. Set 'enabled: true' at the top
+#   3. Run the script - it will use these settings automatically
+#
+# If 'enabled: false' or this file is missing, the script will prompt you
+# interactively for all settings as usual.
+
+# Enable/disable configuration file usage
+enabled: true
+
+# Target folder settings
+target_folder:
+  # Absolute path to the folder you want to scan
+  # Examples (Windows): "C:/Users/YourName/Documents/ExcelFiles"
+  # Examples (Mac/Linux): "/Users/YourName/Documents/ExcelFiles"
+  path: "C:/Users/LeifengZhou/OneDrive - Great Gray, LLC/Projects & Initiatives/202508 - RPAG PAL Feed/PAL File Examples - 202509/Original"
+  
+  # Folder scanning mode:
+  #   "all"       - Scan all subfolders recursively
+  #   "root_only" - Scan only the target folder recursively
+  #   [1, 2, 3]   - Scan specific subfolders by index (see subfolder list in output)
+  scan_mode: "root_only"
+  
+  # List of specific subfolder names to scan (alternative to scan_mode indexes)
+  # If provided and not empty, this overrides scan_mode
+  # Example: ["Subfolder1", "Subfolder2"]
+  specific_subfolders: []
+
+# File filtering settings
+file_filtering:
+  # Enable file filtering by patterns
+  enabled: false
+  
+  # File name patterns to match (glob-style patterns)
+  # Examples:
+  #   - "*Sales*.xlsx"     # Files containing 'Sales' in the name
+  #   - "AB*.xlsx"         # Files starting with 'AB'
+  #   - "*.csv"            # All CSV files
+  #   - "*Report*.txt"     # TXT files containing 'Report'
+  patterns: []
+  
+  # If true, only select one file per pattern (the first match)
+  # If false, select all files matching any pattern
+  one_per_pattern: false
+  
+  # Alternatively, load patterns from a file
+  # Set this to the path of a text file containing patterns (one per line)
+  # This overrides the 'patterns' list above if provided
+  pattern_file: ""
+
+# File selection mode
+file_selection:
+  # How to select files to process:
+  #   "all"    - Process all files found
+  #   "single" - Process only one specific file (specify by name or index)
+  #   "list"   - Process specific files by their indices
+  mode: "all"
+  
+  # If mode is "single", specify the file name (e.g., "Sales_Report.xlsx")
+  # or index number (1-based, e.g., 1 for first file)
+  single_file: ""
+  
+  # If mode is "list", specify file indices to process (1-based)
+  # Example: [1, 3, 5]
+  file_indices: []
+
+# Extraction settings
+extraction:
+  # Extraction mode:
+  #   "simple" - Extract only file/sheet/column names
+  #   "full"   - Extract detailed metadata (headers, types, formulas, etc.)
+  mode: "simple"
+  
+  # Number of rows to scan when detecting headers
+  scan_rows: 20
+  
+  # Supported file extensions (you generally don't need to change this)
+  supported_extensions:
+    - ".xlsx"
+    - ".xls"
+    - ".xlsm"
+    - ".csv"
+    - ".txt"
+    - ".ttx"
+    - ".xml"
+
+# Output settings
+output:
+  # Generate JSON output
+  json:
+    enabled: true
+    # Output filename pattern (timestamp and mode suffix will be added automatically)
+    # Leave empty to use default: "excel_metadata_{timestamp}_{mode}.json"
+    filename_prefix: "excel_metadata"
+  
+  # Generate Excel output
+  excel:
+    enabled: true
+    # If true, an Excel file will be created from the JSON output
+
+# Advanced settings
+advanced:
+  # Stop processing on first error
+  stop_on_error: true
+  
+  # Show verbose output during processing
+  verbose: true
+  
+  # Base folder for calculating relative paths
+  # Options: "auto" (automatic detection), or specify an absolute path
+  base_folder: "auto"
