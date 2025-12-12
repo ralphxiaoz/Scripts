@@ -111,7 +111,7 @@ pip install pandas openpyxl xlrd pyyaml
 
 ## Author
 
-Ralph Xiao (ralphxiaoz@gmail.com)
+ralphxiaoz (ralphxiaoz@gmail.com)
 
 ## License
 
